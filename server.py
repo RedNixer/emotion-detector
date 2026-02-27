@@ -1,3 +1,10 @@
+"""
+Emotion Detection Server
+
+This module runs a Flask application that provides an endpoint for
+emotion detection using the Watson NLP library.
+"""
+
 import flask
 from flask import request
 from EmotionDetection.emotion_detection import emotion_detector
@@ -6,6 +13,11 @@ app = flask.Flask("Emotion Detection")
 
 @app.route("/emotionDetector")
 def emp_detector():
+    """
+    Handle requests to the /emotionDetector endpoint.
+    Retrieves the input text, processes it using the emotion_detector,
+    and returns a formatted string with the emotion scores and dominant emotion.
+    """
     text_to_analyze = request.args.get('textToAnalyze')
     response = emotion_detector(text_to_analyze)
 
@@ -24,6 +36,9 @@ def emp_detector():
 
 @app.route("/")
 def render_index_page():
+    """
+    Render the main index page.
+    """
     return flask.render_template('index.html')
 
 if __name__ == "__main__":
